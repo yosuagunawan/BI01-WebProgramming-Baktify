@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\ProductTypeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +15,17 @@ use App\Http\Controllers\ProductController;
 */
 
 // Route::get('/', function () {
-//     return view('welcome');
+//     return view('home');
 // });
+Route::get('/insert_product', function () {
+    return view('insert_product');
+})->name('insert_product');
+
+
+Route::get('/add_category', [ProductTypeController::class, 'index']);
+Route::post('/insert_product', [ProductController::class, 'store'])->name('admin.insertproduct');
+Route::post('/add_category', [ProductTypeController::class, 'store'])->name('admin.addcategory');
+
 Route::get('/', [ProductController::class, 'index']);
+
+

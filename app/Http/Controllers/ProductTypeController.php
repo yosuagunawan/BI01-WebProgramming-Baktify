@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class ProductTypeController extends Controller
 {
@@ -15,6 +17,8 @@ class ProductTypeController extends Controller
     public function index()
     {
         //
+        $product_types = DB::table('product_types')->get();
+        return view('add_category', ['product_types' => $product_types]);
     }
 
     /**
@@ -36,6 +40,18 @@ class ProductTypeController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = Validator::make($request->all(),[
+            'type_name' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
+        DB::table('product_types')->insert([
+            'type_name' => $request->get('type_name')
+        ]);
+        return redirect('/add_category');
     }
 
     /**

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('ram');
             $table->string('battery');
             $table->string('storage');
+            // $table->integer('product_quantity');
         });
     }
 
