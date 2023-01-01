@@ -17,12 +17,9 @@ use App\Http\Controllers\ProductTypeController;
 // Route::get('/', function () {
 //     return view('home');
 // });
-Route::get('/insert_product', function () {
-    return view('insert_product');
-})->name('insert_product');
-
 
 Route::get('/add_category', [ProductTypeController::class, 'index']);
+Route::get('/insert_product', [ProductController::class, 'index2']);
 Route::post('/insert_product', [ProductController::class, 'store'])->name('admin.insertproduct');
 Route::post('/add_category', [ProductTypeController::class, 'store'])->name('admin.addcategory');
 

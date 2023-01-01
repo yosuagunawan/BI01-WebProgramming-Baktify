@@ -21,6 +21,7 @@ return new class extends Migration
             $table->double('price');
             $table->text('description');
             $table->integer('quantity');
+            $table->string('product_image');
         });
     }
 
