@@ -19,7 +19,8 @@ class CartFactory extends Factory
         return [
             'user_id' => mt_rand(1, 3),
             'product_id' => mt_rand(1, 4),
-            'quantity' => mt_rand(1, 10)
+            'quantity' => mt_rand(1, 10),
+            'check_out_status' => 0
         ];
     }
 }
