@@ -20,12 +20,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->double('price');
             $table->text('description');
-            $table->string('screen_size');
-            $table->string('processor');
-            $table->string('ram');
-            $table->string('battery');
-            $table->string('storage');
-            // $table->integer('product_quantity');
+            $table->integer('quantity');
         });
     }
 
