@@ -82,6 +82,6 @@ class DatabaseSeeder extends Seeder
             'description' => 'Sambut iMac baru. Terinspirasi oleh yang terbaik dari Apple. Ditransformasi oleh chip M1. Mengagumkan di ruang apa pun. Menyatu sempurna dalam hidup Anda.',
 
         ]);
-        Cart::factory(5)->create();
+        Cart::factory(3)->create();
     }
 }
