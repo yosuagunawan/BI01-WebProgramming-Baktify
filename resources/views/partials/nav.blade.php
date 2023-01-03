@@ -11,7 +11,16 @@
                     <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-white" href="/add_category">Add category</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-white" href="/insert_product">Insert Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/products">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/about">About Us</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" role="button"

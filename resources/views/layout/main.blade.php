@@ -21,7 +21,10 @@
         <div class="row row-cols-lg-5 gap-3 row-cols-sm-2 justify-content-center">
             @yield('container')
         </div>
+        @yield('end')
     </div>
+
+    @yield('aboutUsFooter')
 
     @include('partials.footer')
 

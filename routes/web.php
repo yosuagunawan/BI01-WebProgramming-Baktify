@@ -28,5 +28,6 @@ Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('admin.r
 Route::post('/add_category', [ProductTypeController::class, 'store'])->name('admin.addcategory');
 
 Route::get('/', [ProductController::class, 'index']);
-
-
+Route::get('/about', function () {
+    return view('about');
+});
