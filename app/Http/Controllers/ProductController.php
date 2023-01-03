@@ -76,11 +76,7 @@ class ProductController extends Controller
         }
 
         $productImageFile = $request->file('product_image');
-<<<<<<< HEAD
-        $productImageName = time() . '.' . $productImageFile->getClientOriginalExtension();
-=======
         $productImageName = $productImageFile->getClientOriginalName();
->>>>>>> main
         Storage::putFileAs('public/ProductImages', $productImageFile, $productImageName);
 
         DB::table('products')->insert([
