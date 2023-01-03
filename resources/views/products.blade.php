@@ -3,7 +3,7 @@
 @section('container')
     @foreach ($products as $product)
         <div class="card text-center p-1">
-            <a href="/">
+            <a href="/products/{{ $product->id }}">
                 <img src="{{ asset('storage/ProductImages/' . $product->product_image) }}"
                     class="card-img-top img-thumbnail img-fluid" alt="...">
             </a>
