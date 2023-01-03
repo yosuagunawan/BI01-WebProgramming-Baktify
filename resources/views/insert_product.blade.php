@@ -33,7 +33,7 @@
         </select>
     </div>
     @if ($errors->any())
-        <div class="error-message">
+        <div class="alert alert-danger">
             {{$errors->first()}}
         </div>
     @endif

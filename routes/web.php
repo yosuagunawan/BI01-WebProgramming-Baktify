@@ -20,7 +20,11 @@ use App\Http\Controllers\ProductTypeController;
 
 Route::get('/add_category', [ProductTypeController::class, 'index']);
 Route::get('/insert_product', [ProductController::class, 'index2']);
+Route::get('/products', [ProductController::class, 'index3']);
+Route::get('/update_product/{id}', [ProductController::class, 'index4']);
 Route::post('/insert_product', [ProductController::class, 'store'])->name('admin.insertproduct');
+Route::patch('/update_product/{id}', [ProductController::class, 'update'])->name('admin.updateproduct');
+Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('admin.removeproduct');
 Route::post('/add_category', [ProductTypeController::class, 'store'])->name('admin.addcategory');
 
 Route::get('/', [ProductController::class, 'index']);
