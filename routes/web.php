@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductTypeController;
 /*
@@ -21,6 +22,7 @@ use App\Http\Controllers\ProductTypeController;
 Route::get('/add_category', [ProductTypeController::class, 'index']);
 Route::get('/insert_product', [ProductController::class, 'index2']);
 Route::get('/products', [ProductController::class, 'index3']);
+Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/update_product/{id}', [ProductController::class, 'index4']);
 Route::post('/insert_product', [ProductController::class, 'store'])->name('admin.insertproduct');
 Route::patch('/update_product/{id}', [ProductController::class, 'update'])->name('admin.updateproduct');
@@ -31,3 +33,5 @@ Route::get('/', [ProductController::class, 'index']);
 Route::get('/about', function () {
     return view('about');
 });
+
+Route::get('/profile', [UserController::class, 'show']);
