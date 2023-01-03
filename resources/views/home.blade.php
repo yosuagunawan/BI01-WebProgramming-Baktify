@@ -1,14 +1,28 @@
 @extends('layout.main')
 
-
 @section('section')
-    <h1>Halaman Home<h1>
-            @foreach ($products as $product)
-                {{ $product->name }}
-                {{ $product->price }}
-                <br>
-            @endforeach
-            {{-- @foreach ($products as $product)
+    <h1>Halaman Home</h1>
+@endsection
+
+@section('container')
+    @foreach ($products as $product)
+        <div class="card text-center p-1">
+            <img src="{{ asset('storage/ProductImages/' . $product->product_image) }}"
+                class="card-img-top img-thumbnail img-fluid" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ $product->name }}</h5>
+                <p class="card-text">{{ $product->price }}</p>
+                <h6 class="card-text bg-danger-subtle rounded-4 w-50 m-auto">{{ $product->product_type_id }}</h6>
+                <hr>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+            </div>
+        </div>
+
+
+
+        <br>
+    @endforeach
+    {{-- @foreach ($products as $product)
                 <div class="col">
                     <div class="card p-3 my-2">
                         <img src="/asset/BookMockup.png" class="img-thumbnail img-fluid" alt="...">
@@ -40,4 +54,4 @@
                     </div>
                 </div>
             @endforeach --}}
-        @endsection
+@endsection

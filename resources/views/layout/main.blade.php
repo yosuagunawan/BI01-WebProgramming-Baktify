@@ -11,40 +11,14 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" href="/asset/Laravel_Icon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    {{-- <style>
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #6EA8FE;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0D6EFD;
-        }
-        .img-description {
-            width: 50%;
-            margin: auto;
-        }
-        li.nav-item>a {
-            font-size: 1.5em;
-        }
-        @media only screen and (max-width: 992px) {
-            .mainPost>h2 {
-                font-size: 1em;
-            }
-            .mainPost>p {
-                font-size: 0.75em;
-            }
-        }
-    </style> --}}
 </head>
 
 <body>
     @include('partials.nav')
 
-    <div class="container">
+    <div class="container my-3">
         @yield('section')
-        <div class="row row-cols-lg-4 row-cols-sm-2">
+        <div class="row row-cols-lg-5 gap-3 row-cols-sm-2 justify-content-center">
             @yield('container')
         </div>
     </div>

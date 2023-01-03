@@ -47,7 +47,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'product_image' => 'required|image|mimes:jpeg,jpg,png',
             'name' => 'required|min:5',
             'description' => 'required|min:15|max:500',
@@ -56,12 +56,12 @@ class ProductController extends Controller
             'product_type' => 'required'
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
 
         $productImageFile = $request->file('product_image');
-        $productImageName = time().'.'.$productImageFile->getClientOriginalExtension();
+        $productImageName = time() . '.' . $productImageFile->getClientOriginalExtension();
         Storage::putFileAs('public/ProductImages', $productImageFile, $productImageName);
 
         DB::table('products')->insert([
