@@ -32,6 +32,12 @@
                 @endforeach
             </select>
         </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+        @endif
         @if ($errors->any())
             <div class="alert alert-danger">
                 {{ $errors->first() }}
