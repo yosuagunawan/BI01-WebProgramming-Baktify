@@ -192,6 +192,7 @@ class UserController extends Controller
 
         $user = UserController::find_user_by_email($email);
 
+        // ini yang aku enter
         if (trim($name) == "") {
             $validator->after(function ($validator) {
                 $validator->errors()->add(
