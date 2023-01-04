@@ -1,6 +1,12 @@
 @extends('layout.main')
 
 @section('container')
+    {{-- alert --}}
+    {{-- @if(session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif --}}
     @foreach ($products as $product)
         <div class="card text-center p-1">
             <a href="/products/{{ $product->id }}">
@@ -19,13 +25,23 @@
                     @endif
                 @endforeach
                 <hr>
-                <div class="d-flex gap-1">
-                    <button class="btn btn-primary"
-                        onclick="location.href='{{ url('update_product', ['id' => $product->id]) }}'">Update</button>
-                    <button class="btn btn-danger"
-                        onclick="location.href='{{ url('delete', ['id' => $product->id]) }}'">Delete</button>
+                @auth
+                    @if (auth()->user()->role_id == '1')
+                    <div class="d-flex gap-1">
+                        <button class="btn btn-primary"
+                            onclick="location.href='{{ url('addtocart', ['id' => $product->id]) }}'">add to cart</button>
+                        </div>
+                    @else
+                        <div class="d-flex gap-1">
+                            <button class="btn btn-primary"
+                                onclick="location.href='{{ url('update_product', ['id' => $product->id]) }}'">Update</button>
+                            <button class="btn btn-danger"
+                                onclick="location.href='{{ url('delete', ['id' => $product->id]) }}'">Delete</button>
+                        </div>
+                    @endif
 
-                </div>
+                @endauth
+
             </div>
         </div>
     @endforeach
@@ -61,6 +77,7 @@
                     </div>
                 </div>
             @endforeach --}}
+
 @endsection
 
 @section('end')

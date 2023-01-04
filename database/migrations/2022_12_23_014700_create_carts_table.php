@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illumintate\Database\QueryException;
 
 return new class extends Migration
 {
@@ -14,13 +15,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('carts', function (Blueprint $table) {
-            // $table->id();
+            $table->id();
             $table->foreignId('user_id');
             $table->foreignId('product_id');
             $table->integer('quantity');
             $table->boolean('check_out_status');
             // $table->date('transaction_date');
-            $table->primary(['user_id', 'product_id']);
+            // $table->primary(['user_id', 'product_id']);
         });
     }
 

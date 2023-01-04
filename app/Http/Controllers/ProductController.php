@@ -144,14 +144,8 @@ class ProductController extends Controller
             // dd($product->product_image);
             unlink(storage_path('app/public/ProductImages/'.$product->product_image));
             DB::table('products')
-<<<<<<< HEAD
                 -> where('id', 'like', $id)
                 -> update(['product_image' => $productImageName]);
-
-=======
-                ->where('id', 'like', $id)
-                ->update(['product_image' => $productImageName]);
->>>>>>> 7af52f9daf0dd381bd1cdeb2cfdcc4e01b265b8f
         }
 
         DB::table('products')
