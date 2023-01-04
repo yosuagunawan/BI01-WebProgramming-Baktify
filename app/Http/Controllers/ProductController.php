@@ -142,10 +142,15 @@ class ProductController extends Controller
             Storage::putFileAs('public/ProductImages', $productImageFile, $productImageName);
             $product = Product::find($id);
             // dd($product->product_image);
-            unlink(storage_path('app/public/ProductImages/'.$product->product_image));
+            unlink(storage_path('app/public/ProductImages/' . $product->product_image));
             DB::table('products')
+<<<<<<< Updated upstream
                 -> where('id', 'like', $id)
                 -> update(['product_image' => $productImageName]);
+=======
+                ->where('id', 'like', $id)
+                ->update(['product_image' => $productImageName]);
+>>>>>>> Stashed changes
         }
 
         DB::table('products')
@@ -172,7 +177,7 @@ class ProductController extends Controller
     {
         //
         $product = Product::find($id);
-        unlink(storage_path('app/public/ProductImages/'.$product->product_image));
+        unlink(storage_path('app/public/ProductImages/' . $product->product_image));
         DB::table('products')->where('id', 'like', $id)->delete();
         return redirect()->back();
     }

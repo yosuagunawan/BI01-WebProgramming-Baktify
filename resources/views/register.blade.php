@@ -20,6 +20,11 @@
                     @foreach ($errors->get('password') as $error)
                         <p>{{ $error }}</p>
                     @endforeach
+                    <p>Password Confirmation: </p> <input type="password" name="password_confirmation" value=""
+                        class="form-control p-0 fs-2">
+                    @foreach ($errors->get('password_confirmation') as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
                     <p>Address: </p> <input type="text" name="address" value="" class="form-control p-0 fs-2">
                     @foreach ($errors->get('address') as $error)
                         <p>{{ $error }}</p>
