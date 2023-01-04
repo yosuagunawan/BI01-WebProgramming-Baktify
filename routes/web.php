@@ -38,3 +38,5 @@ Route::get('/profile', [UserController::class, 'show']);
 
 Route::get('/register', [UserController::class, 'register'])->middleware('guest');
 Route::post('/register', [UserController::class, 'store'])->middleware('guest');
+Route::post('/login', [UserController::class, 'login'])->middleware('guest');
+Route::get('/login', [UserController::class, 'get_login_page'])->name('login')->middleware('guest');

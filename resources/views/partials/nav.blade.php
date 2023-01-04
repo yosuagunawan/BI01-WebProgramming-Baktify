@@ -34,7 +34,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="/login">Login</a></li>
                     </ul>
                 </li>
             </ul>

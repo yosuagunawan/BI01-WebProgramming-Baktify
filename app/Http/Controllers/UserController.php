@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -17,6 +18,42 @@ class UserController extends Controller
     public function register()
     {
         return view('register');
+    }
+
+    public static function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        // Kalo dijalankan, nanti validasi error yg dibawah ga dijalanin
+        // if($validator->fails() == true){
+        //     return back()->withErrors($validator);
+        // }
+
+        $login_data = $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if (Auth::attempt($login_data, false) == true) {
+            $request->session()->regenerate();
+            return redirect('/');
+        } else {
+            $validator->after(function ($validator) {
+                $validator->errors()->add(
+                    'error',
+                    'Email or password is wrong!'
+                );
+            });
+            return back()->withErrors($validator);
+        }
+    }
+
+    public static function get_login_page()
+    {
+        return view('login');
     }
 
     /**
