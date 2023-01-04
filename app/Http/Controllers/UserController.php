@@ -56,6 +56,14 @@ class UserController extends Controller
         return view('login');
     }
 
+    public static function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -152,9 +160,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Request $request)
     {
-        //
+        $user_id = $request->get('user_id');
+        $user = User::find($user_id);
+        return view('profile_update', ['userUpdate' => $user]);
     }
 
     /**
@@ -166,7 +176,45 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required|confirmed',
+            'address' => 'required',
+            'phone' => 'required'
+        ]);
+
+        $name = $request->get('name');
+        $email = $request->get('email');
+        $password = $request->get('password');
+        $address = $request->get('address');
+        $phone = $request->get('phone');
+
+        $user = UserController::find_user_by_email($email);
+
+        if (trim($name) == "") {
+            $validator->after(function ($validator) {
+                $validator->errors()->add(
+                    'name',
+                    'Name must not empty!'
+                );
+            });
+        }
+
+        if ($validator->fails() == true) {
+            return back()->withErrors($validator);
+        }
+
+        $user->name = $name;
+        $user->email = $email;
+        $user->address = $address;
+        $user->phone = $phone;
+        $user->password = bcrypt($password);
+        $user_role = UserRoleController::get_role_by_name('normal');
+        $user->role_id = $user_role->id;
+        $user->save();
+
+        return redirect('/');
     }
 
     /**

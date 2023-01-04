@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -44,15 +45,15 @@ class CartController extends Controller
     {
 
         $temp = DB::table('carts')
-        ->where([
-            ['user_id', 'like', auth()->user()->id],
-            ['product_id', 'like', $id],
-            ['check_out_status', '=', '0']
-            ]) -> get();
+            ->where([
+                ['user_id', 'like', auth()->user()->id],
+                ['product_id', 'like', $id],
+                ['check_out_status', '=', '0']
+            ])->get();
 
-            if(sizeof($temp) > 0) {
-                return redirect()->back()->with('message', 'Product is already in cart');
-            }
+        if (sizeof($temp) > 0) {
+            return redirect()->back()->with('message', 'Product is already in cart');
+        }
         // if(sizeof($temp) > 0) {
         //     if($product->quantity == 0) {
         //         return redirect()->back()->with('message', 'Product sold out');
@@ -125,16 +126,15 @@ class CartController extends Controller
 
         $tr = Cart::find($id);
         $product = Product::find($tr->product_id);
-        if($request->get('quantity') > $tr->quantity) {
-            if($product->quantity > $request->get('quantity') - $tr->quantity) {
+        if ($request->get('quantity') > $tr->quantity) {
+            if ($product->quantity > $request->get('quantity') - $tr->quantity) {
                 //update cart and product
             } else {
                 // invalid stock kurang
                 return redirect()->back()->with('message', 'stock is not enough');
-
             }
-        } else if($request->get('quantity') < $tr->quantity){
-            if($request->get('quantity') == 0) {
+        } else if ($request->get('quantity') < $tr->quantity) {
+            if ($request->get('quantity') == 0) {
                 //delete from cart
             } else {
                 //update cart

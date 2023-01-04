@@ -2,7 +2,7 @@
 
 @section('container')
     {{-- alert --}}
-    {{-- @if(session()->has('message'))
+    {{-- @if (session()->has('message'))
             <div class="alert alert-success">
                 {{ session()->get('message') }}
             </div>
@@ -27,9 +27,9 @@
                 <hr>
                 @auth
                     @if (auth()->user()->role_id == '1')
-                    <div class="d-flex gap-1">
-                        <button class="btn btn-primary"
-                            onclick="location.href='{{ url('addtocart', ['id' => $product->id]) }}'">add to cart</button>
+                        <div class="d-flex gap-1 justify-content-center">
+                            <button class="btn btn-primary"
+                                onclick="location.href='{{ url('addtocart', ['id' => $product->id]) }}'">Add to Cart</button>
                         </div>
                     @else
                         <div class="d-flex gap-1">
@@ -77,7 +77,6 @@
                     </div>
                 </div>
             @endforeach --}}
-
 @endsection
 
 @section('end')

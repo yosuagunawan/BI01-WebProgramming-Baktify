@@ -144,13 +144,8 @@ class ProductController extends Controller
             // dd($product->product_image);
             unlink(storage_path('app/public/ProductImages/' . $product->product_image));
             DB::table('products')
-<<<<<<< Updated upstream
-                -> where('id', 'like', $id)
-                -> update(['product_image' => $productImageName]);
-=======
                 ->where('id', 'like', $id)
                 ->update(['product_image' => $productImageName]);
->>>>>>> Stashed changes
         }
 
         DB::table('products')

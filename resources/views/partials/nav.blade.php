@@ -22,6 +22,9 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/about">About Us</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/carts">Cart</a>
+                </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" role="button"

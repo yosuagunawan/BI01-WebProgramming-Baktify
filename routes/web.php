@@ -29,17 +29,22 @@ Route::post('/insert_product', [ProductController::class, 'store'])->name('admin
 Route::patch('/update_product/{id}', [ProductController::class, 'update'])->name('admin.updateproduct');
 Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('admin.removeproduct');
 Route::post('/add_category', [ProductTypeController::class, 'store'])->name('admin.addcategory');
+
 Route::get('/carts', [CartController::class, 'index']);
 Route::get('/addtocart/{id}', [CartController::class, 'store'])->name('member.addtocart');
 Route::get('/updatecart/{id}', [CartController::class, 'update'])->name('member.updatecart');
 
 Route::get('/', [ProductController::class, 'index']);
+Route::get('/home', [ProductController::class, 'index']);
 Route::get('/about', function () {
     return view('about');
 });
 
 Route::get('/profile', [UserController::class, 'show']);
+Route::get('/profile_update', [UserController::class, 'edit']);
+Route::post('/profile_update', [UserController::class, 'update']);
 Route::get('/register', [UserController::class, 'register'])->middleware('guest');
 Route::post('/register', [UserController::class, 'store'])->middleware('guest');
 Route::post('/login', [UserController::class, 'login'])->middleware('guest');
 Route::get('/login', [UserController::class, 'get_login_page'])->name('login')->middleware('guest');
+Route::get('/logout', [UserController::class, 'logout'])->middleware('auth');

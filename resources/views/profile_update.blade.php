@@ -4,9 +4,9 @@
     <div class="row justify-content-center my-3">
         <div class="col-md-8">
             <main class="w-75 m-auto">
-                <h1 class="mb-3 fw-normal text-center">Registration Form</h1>
+                <h1 class="mb-3 fw-normal text-center">Update Profile</h1>
 
-                <form action="/register" method="POST">
+                <form action="/profile_update" method="POST">
                     @csrf
                     <p>Name: </p> <input type="text" name="name" value="" class="form-control p-0 fs-2">
                     @foreach ($errors->get('name') as $error)
@@ -34,7 +34,7 @@
                         <p>{{ $error }}</p>
                     @endforeach
                     <div class="w-50 m-auto text-center mt-3">
-                        <input type="submit" value="Regis Account" class="btn btn-lg btn-primary">
+                        <input type="submit" value="Update" class="btn btn-lg btn-primary">
                     </div>
                 </form>
                 <small class="d-block text-center mt-3">Already Registered <a href="/login">Login</a></small>
