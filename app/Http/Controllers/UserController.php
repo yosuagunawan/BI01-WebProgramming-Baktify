@@ -189,8 +189,8 @@ class UserController extends Controller
         $password = $request->get('password');
         $address = $request->get('address');
         $phone = $request->get('phone');
-
-        $user = UserController::find_user_by_email($email);
+        // dd($name);
+        $user = User::find(auth()->user()->id);
 
         // ini yang aku enter
         if (trim($name) == "") {
