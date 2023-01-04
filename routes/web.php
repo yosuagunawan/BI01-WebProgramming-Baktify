@@ -35,3 +35,6 @@ Route::get('/about', function () {
 });
 
 Route::get('/profile', [UserController::class, 'show']);
+
+Route::get('/register', [UserController::class, 'register'])->middleware('guest');
+Route::post('/register', [UserController::class, 'store'])->middleware('guest');
