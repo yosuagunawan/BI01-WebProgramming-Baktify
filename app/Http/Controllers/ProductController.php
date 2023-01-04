@@ -138,10 +138,13 @@ class ProductController extends Controller
             $productImageFile = $request->file('product_image');
             $productImageName = $productImageFile->getClientOriginalName();
             Storage::putFileAs('public/ProductImages', $productImageFile, $productImageName);
-
+            $product = Product::find($id);
+            // dd($product->product_image);
+            unlink(storage_path('app/public/ProductImages/'.$product->product_image));
             DB::table('products')
                 -> where('id', 'like', $id)
                 -> update(['product_image' => $productImageName]);
+
         }
 
         DB::table('products')
@@ -165,6 +168,8 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+        $product = Product::find($id);
+        unlink(storage_path('app/public/ProductImages/'.$product->product_image));
         DB::table('products')->where('id', 'like', $id)->delete();
         return redirect()->back();
     }
