@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class UserRoleController extends Controller
 {
+    public static function get_role_by_name($role_name)
+    {
+        $role = UserRole::where('role_name', '=', $role_name)->get()->first();
+        return $role;
+    }
     /**
      * Display a listing of the resource.
      *

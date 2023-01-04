@@ -20,7 +20,7 @@ class ProductController extends Controller
     // route home
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(4);
         return view('home', ['products' => $products]);
     }
     // route insert_product page
@@ -32,12 +32,13 @@ class ProductController extends Controller
     // route products page
     public function index3()
     {
-        $products = Product::all();
+        $products = Product::paginate(4);
         $product_types = DB::table('product_types')->get();
         return view('products', ['products' => $products, 'product_types' => $product_types]);
     }
     //route update_product page
-    public function index4($id) {
+    public function index4($id)
+    {
         $product = Product::find($id);
         // dd($product);
         return view('update_product', compact('product'));
@@ -97,9 +98,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($product_id)
     {
-        //
+        $product = Product::find($product_id);
+        return view('product', ['product' => $product]);
     }
 
     /**
@@ -123,14 +125,14 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'product_image' => 'image|mimes:jpeg,jpg,png',
             'name' => 'required|min:5',
             'description' => 'required|min:15|max:500',
             'price' => 'required|numeric|min:1000|max:10000000',
             'stock' => 'required|numeric|min:1|max:10000',
         ]);
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
 
@@ -142,18 +144,25 @@ class ProductController extends Controller
             // dd($product->product_image);
             unlink(storage_path('app/public/ProductImages/'.$product->product_image));
             DB::table('products')
+<<<<<<< HEAD
                 -> where('id', 'like', $id)
                 -> update(['product_image' => $productImageName]);
 
+=======
+                ->where('id', 'like', $id)
+                ->update(['product_image' => $productImageName]);
+>>>>>>> 7af52f9daf0dd381bd1cdeb2cfdcc4e01b265b8f
         }
 
         DB::table('products')
-            -> where('id', 'like', $id)
-            -> update(
-                ['name' => $request->get('name'),
-                'description' => $request->get('description'),
-                'price' => $request->get('price'),
-                'quantity' => $request->get('stock')]
+            ->where('id', 'like', $id)
+            ->update(
+                [
+                    'name' => $request->get('name'),
+                    'description' => $request->get('description'),
+                    'price' => $request->get('price'),
+                    'quantity' => $request->get('stock')
+                ]
             );
 
         return redirect()->back()->with('message', 'Product successfully updated');
