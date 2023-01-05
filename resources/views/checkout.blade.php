@@ -52,7 +52,12 @@
         </table>
         <div class="d-flex justify-content-between flex-row-reverse">
             <h3>Total Price: {{ $total }}</h3>
-            <a href="/checkout" class="btn btn-primary">Checkout</a>
+            <p>Ship to: Member Address</p>
+        </div>
+        <div class="text-end">
+            <p>Please enter the following passcode to checkout: {{ $random }}</p>
+            <input type="text">
+            <button>Confirm</button>
         </div>
     @endif
 @endsection

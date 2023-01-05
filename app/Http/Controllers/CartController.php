@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
@@ -25,6 +26,15 @@ class CartController extends Controller
         return view('cart', ['cart' => $cart, 'products' => $products]);
     }
 
+    public function checkout()
+    {
+        $cart = DB::table('carts')->where('user_id', 'like', auth()->user()->id)->get();
+        $products = DB::table('products')->get();
+        $random = Str::random(6);
+        // dd($products);
+        // dd($cart);
+        return view('checkout', ['cart' => $cart, 'products' => $products, 'random' => $random]);
+    }
     /**
      * Show the form for creating a new resource.
      *
