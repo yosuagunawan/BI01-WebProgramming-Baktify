@@ -34,6 +34,7 @@ Route::get('/carts', [CartController::class, 'index']);
 Route::get('/addtocart/{id}', [CartController::class, 'store'])->name('member.addtocart');
 Route::get('/updatecart/{id}', [CartController::class, 'update'])->name('member.updatecart');
 Route::get('/checkout', [CartController::class, 'checkout']);
+Route::get('/transaction', [CartController::class, 'transaction']);
 
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/home', [ProductController::class, 'index']);
