@@ -24,13 +24,19 @@
                         </h6>
                     @endif
                 @endforeach
-                <hr>
+
                 @auth
+                    <hr>
                     @if (auth()->user()->role_id == '1')
-                        <div class="d-flex gap-1 justify-content-center">
-                            <button class="btn btn-primary"
-                                onclick="location.href='{{ url('addtocart', ['id' => $product->id]) }}'">Add to Cart</button>
-                        </div>
+                        @if ($product->quantity == 0)
+                            <p class="bg-danger rounded p-2 text-white">Out Of Stock</p>
+                        @else
+                            <div class="d-flex gap-1 justify-content-center">
+                                <button class="btn btn-primary"
+                                    onclick="location.href='{{ url('addtocart', ['id' => $product->id]) }}'">Add to
+                                    Cart</button>
+                            </div>
+                        @endif
                     @else
                         <div class="d-flex gap-1">
                             <button class="btn btn-primary"
