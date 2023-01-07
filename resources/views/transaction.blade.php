@@ -40,10 +40,6 @@
                                     @endphp
                                 @endif
                             @endforeach
-                            <td>
-                                <button class="btn btn-primary"
-                                    onclick="location.href='{{ url('updatecart', ['id' => $c->id]) }}'">Update Cart</button>
-                            </td>
                         </tr>
                     </tbody>
                     @php

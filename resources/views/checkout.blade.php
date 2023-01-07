@@ -56,8 +56,8 @@
         </div>
         <div class="text-end">
             <p>Please enter the following passcode to checkout: {{ $random }}</p>
-            <input type="text">
-            <button>Confirm</button>
+            <input type="text" name="confirmed" value="" class="form-control p-0 fs-2">
+            <input type="submit" value="Confirm" class="btn btn-lg btn-primary">
         </div>
     @endif
 @endsection
