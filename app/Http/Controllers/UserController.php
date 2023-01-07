@@ -97,7 +97,7 @@ class UserController extends Controller
             'email' => 'required|email:dns|unique:users',
             'password' => 'required|confirmed|min:8',
             'address' => 'required|min:15',
-            'phone' => 'required:min:11'
+            'phone' => 'required|min:11|numeric'
         ]);
 
         $name = $request->get('name');
@@ -181,7 +181,7 @@ class UserController extends Controller
             'email' => 'required|email:dns|unique:users',
             'password' => 'required|confirmed|min:8',
             'address' => 'required|min:15',
-            'phone' => 'required:min:11'
+            'phone' => 'required|min:11|numeric'
         ]);
 
         $name = $request->get('name');
