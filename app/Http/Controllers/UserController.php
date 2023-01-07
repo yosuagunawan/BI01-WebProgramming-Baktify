@@ -93,11 +93,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required|confirmed',
-            'address' => 'required',
-            'phone' => 'required'
+            'name' => 'required|max:255',
+            'email' => 'required|email:dns|unique:users',
+            'password' => 'required|confirmed|min:8',
+            'address' => 'required|min:15',
+            'phone' => 'required:min:11'
         ]);
 
         $name = $request->get('name');
@@ -177,11 +177,11 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required|confirmed',
-            'address' => 'required',
-            'phone' => 'required'
+            'name' => 'required|max:255',
+            'email' => 'required|email:dns|unique:users',
+            'password' => 'required|confirmed|min:8',
+            'address' => 'required|min:15',
+            'phone' => 'required:min:11'
         ]);
 
         $name = $request->get('name');

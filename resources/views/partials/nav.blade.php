@@ -5,7 +5,7 @@
             <ul class="nav mb-2 mb-lg-0">
                 @can('admin')
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/add_category">Add category</a>
+                        <a class="nav-link text-white" href="/add_category">Add Category</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="/insert_product">Insert Product</a>
