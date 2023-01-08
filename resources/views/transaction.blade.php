@@ -12,44 +12,37 @@
                     <th scope="col">PRICE</th>
                     <th scope="col">QTY</th>
                     <th scope="col">SUBTOTAL</th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
-            @php
-                $total = 0;
-            @endphp
-            @foreach ($cart as $c)
-                @if ($c->check_out_status == 1)
-                    <tbody>
-                        <tr>
-                            @foreach ($products as $p)
-                                @if ($c->product_id == $p->id)
-                                    <td>
-                                        <img src="../storage/ProductImages/{{ $p->product_image }}" alt="">
-                                        {{ $p->name }}
-                                    </td>
-                                    <td>{{ $p->price }}</td>
-                                @endif
-                            @endforeach
-                            <td><input type="number" value="{{ $c->quantity }}" name="quantity"></td>
-                            @foreach ($products as $p)
-                                @if ($c->product_id == $p->id)
-                                    <td>{{ $c->quantity * $p->price }}</td>
-                                    @php
-                                        $subtotal = $c->quantity * $p->price;
-                                    @endphp
-                                @endif
-                            @endforeach
-                        </tr>
-                    </tbody>
-                    @php
-                        $total += $subtotal;
-                    @endphp
-                @endif
+            @foreach ($times as $t)
+                <td style="border: none"><h5>{{$t->transaction_time}}</h5></td>
+                @foreach ($carts as $c)
+                    @if ($c->transaction_time == $t->transaction_time)
+                        <tbody>
+                            <tr>
+                                @foreach ($products as $p)
+                                    @if ($c->product_id == $p->id)
+                                        <td>
+                                            <img src="../storage/ProductImages/{{ $p->product_image }}" alt="">
+                                            {{ $p->name }}
+                                        </td>
+                                        <td>IDR {{ $p->price }}</td>
+                                    @endif
+                                @endforeach
+                                <td><input type="number" value="{{ $c->quantity }}" readonly></td>
+                                @foreach ($products as $p)
+                                    @if ($c->product_id == $p->id)
+                                        <td>IDR {{ $c->quantity * $p->price }}</td>
+                                    @endif
+                                @endforeach
+                            </tr>
+                        </tbody>
+                    @endif
+                @endforeach
             @endforeach
         </table>
         <div class="d-flex justify-content-between flex-row-reverse">
-            <h3>Total Price: {{ $total }}</h3>
+            <h3>Total Price: IDR {{ $total }}</h3>
         </div>
     @endif
 @endsection

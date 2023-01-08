@@ -39,7 +39,7 @@ class CartController extends Controller
         return view('cart', ['carts' => $carts, 'products' => $products, 'total' => $total]);
     }
 
-    public function indexTR() {
+    public function transaction() {
         $times = DB::table('carts')->distinct()->where('check_out_status', '=', '1')->get('transaction_time');
         $carts = DB::table('carts')
             ->where([
@@ -62,24 +62,24 @@ class CartController extends Controller
         return view('transaction', ['carts' => $carts, 'products' => $products, 'total' => $total, 'times' => $times]);
     }
 
-    public function checkout()
-    {
-        $cart = DB::table('carts')->where('user_id', 'like', auth()->user()->id)->get();
-        $products = DB::table('products')->get();
-        $random = Str::random(6);
-        // dd($products);
-        // dd($cart);
-        return view('checkout', ['cart' => $cart, 'products' => $products, 'random' => $random]);
-    }
+    // public function checkout()
+    // {
+    //     $carts = DB::table('carts')->where('user_id', 'like', auth()->user()->id)->get();
+    //     $products = DB::table('products')->get();
+    //     $random = Str::random(6);
+    //     // dd($products);
+    //     // dd($cart);
+    //     return view('checkout', ['carts' => $carts, 'products' => $products, 'random' => $random]);
+    // }
 
-    public function transaction()
-    {
-        $cart = DB::table('carts')->where('user_id', 'like', auth()->user()->id)->get();
-        $products = DB::table('products')->get();
-        // dd($products);
-        // dd($cart);
-        return view('transaction', ['cart' => $cart, 'products' => $products]);
-    }
+    // public function transaction()
+    // {
+    //     $cart = DB::table('carts')->where('user_id', 'like', auth()->user()->id)->get();
+    //     $products = DB::table('products')->get();
+    //     // dd($products);
+    //     // dd($cart);
+    //     return view('transaction', ['cart' => $cart, 'products' => $products]);
+    // }
     /**
      * Show the form for creating a new resource.
      *

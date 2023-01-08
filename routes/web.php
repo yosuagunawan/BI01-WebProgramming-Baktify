@@ -30,16 +30,12 @@ Route::patch('/update_product/{id}', [ProductController::class, 'update'])->name
 Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('admin.removeproduct');
 Route::post('/add_category', [ProductTypeController::class, 'store'])->name('admin.addcategory');
 
-Route::get('/carts', [CartController::class, 'index']);
-Route::get('/addtocart/{id}', [CartController::class, 'store'])->name('member.addtocart');
-Route::patch('/updatecart/{id}', [CartController::class, 'update'])->name('member.updatecart');
 Route::get('/checkoutcart', [CartController::class, 'viewcheckout']);
-Route::post('/checkout/{passcode}', [CartController::class, 'checkout'])->name('member.checkout');
-Route::get('/transaction', [CartController::class, 'indexTR']);
+Route::post('/checkoutcart/{passcode}', [CartController::class, 'checkout'])->name('member.checkout')->middleware('not_admin');
 Route::get('/carts', [CartController::class, 'index'])->middleware('not_admin');
 Route::get('/addtocart/{id}', [CartController::class, 'store'])->name('member.addtocart')->middleware('not_admin');
 Route::get('/updatecart/{id}', [CartController::class, 'update'])->name('member.updatecart')->middleware('not_admin');
-Route::get('/checkout', [CartController::class, 'checkout'])->middleware('not_admin');
+// Route::get('/checkout', [CartController::class, 'checkout'])->middleware('not_admin');
 Route::get('/transaction', [CartController::class, 'transaction'])->middleware('not_admin');
 
 Route::get('/', [ProductController::class, 'index']);

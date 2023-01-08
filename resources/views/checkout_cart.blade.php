@@ -46,12 +46,6 @@
                 </form>
                 @endforeach
         </table>
-    @endif
-    @if (session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
-        </div>
-    @endif
     <div id="check-out">
         <p>shipping address : {{auth()->user()->address}}</p>
         <h4>IDR {{$total}}</h4>
@@ -72,4 +66,10 @@
             <button type="submit" class="btn btn-primary">Confirm</button>
         </form>
     </div>
+    @endif
+    @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
 @endsection

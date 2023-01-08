@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('section')
-    @if (count($cart) == 0)
+    @if (count($carts) == 0)
         <h4>Cart is empty</h4>
     @else
         <h4>Your Cart</h4>
@@ -18,7 +18,7 @@
             @php
                 $total = 0;
             @endphp
-            @foreach ($cart as $c)
+            @foreach ($carts as $c)
                 <tbody>
                     <tr>
                         @foreach ($products as $p)
