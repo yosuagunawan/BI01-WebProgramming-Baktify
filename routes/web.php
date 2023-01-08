@@ -20,8 +20,8 @@ use App\Http\Controllers\ProductTypeController;
 //     return view('home');
 // });
 
-Route::get('/add_category', [ProductTypeController::class, 'index']);
-Route::get('/insert_product', [ProductController::class, 'index2']);
+Route::get('/add_category', [ProductTypeController::class, 'index'])->middleware('admin');
+Route::get('/insert_product', [ProductController::class, 'index2'])->middleware('admin');
 Route::get('/products', [ProductController::class, 'index3']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/update_product/{id}', [ProductController::class, 'index4']);
@@ -36,6 +36,11 @@ Route::patch('/updatecart/{id}', [CartController::class, 'update'])->name('membe
 Route::get('/checkoutcart', [CartController::class, 'viewcheckout']);
 Route::post('/checkout/{passcode}', [CartController::class, 'checkout'])->name('member.checkout');
 Route::get('/transaction', [CartController::class, 'indexTR']);
+Route::get('/carts', [CartController::class, 'index'])->middleware('not_admin');
+Route::get('/addtocart/{id}', [CartController::class, 'store'])->name('member.addtocart')->middleware('not_admin');
+Route::get('/updatecart/{id}', [CartController::class, 'update'])->name('member.updatecart')->middleware('not_admin');
+Route::get('/checkout', [CartController::class, 'checkout'])->middleware('not_admin');
+Route::get('/transaction', [CartController::class, 'transaction'])->middleware('not_admin');
 
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/home', [ProductController::class, 'index']);

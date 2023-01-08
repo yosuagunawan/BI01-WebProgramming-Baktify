@@ -62,6 +62,24 @@ class CartController extends Controller
         return view('transaction', ['carts' => $carts, 'products' => $products, 'total' => $total, 'times' => $times]);
     }
 
+    public function checkout()
+    {
+        $cart = DB::table('carts')->where('user_id', 'like', auth()->user()->id)->get();
+        $products = DB::table('products')->get();
+        $random = Str::random(6);
+        // dd($products);
+        // dd($cart);
+        return view('checkout', ['cart' => $cart, 'products' => $products, 'random' => $random]);
+    }
+
+    public function transaction()
+    {
+        $cart = DB::table('carts')->where('user_id', 'like', auth()->user()->id)->get();
+        $products = DB::table('products')->get();
+        // dd($products);
+        // dd($cart);
+        return view('transaction', ['cart' => $cart, 'products' => $products]);
+    }
     /**
      * Show the form for creating a new resource.
      *

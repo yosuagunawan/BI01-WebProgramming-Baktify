@@ -24,8 +24,8 @@
                         @foreach ($products as $p)
                             @if ($c->product_id == $p->id)
                                 <td>
-                                    <button type="submit" class="btn btn-primary"
-                                        onclick="location.href='{{ url('updatecart', ['id' => $c->id]) }}'">Update Cart</button>
+                                    <img src="../storage/ProductImages/{{ $p->product_image }}" alt="">
+                                    {{ $p->name }}
                                 </td>
                                 <td>{{ $p->price }}</td>
                             @endif
@@ -52,7 +52,12 @@
         </table>
         <div class="d-flex justify-content-between flex-row-reverse">
             <h3>Total Price: {{ $total }}</h3>
-            <a href="/checkout" class="btn btn-primary">Checkout</a>
+            <p>Ship to: Member Address</p>
+        </div>
+        <div class="text-end">
+            <p>Please enter the following passcode to checkout: {{ $random }}</p>
+            <input type="text" name="confirmed" value="" class="form-control p-0 fs-2">
+            <input type="submit" value="Confirm" class="btn btn-lg btn-primary">
         </div>
     @endif
 @endsection

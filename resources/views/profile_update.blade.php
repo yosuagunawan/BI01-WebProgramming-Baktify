@@ -37,7 +37,6 @@
                         <input type="submit" value="Update" class="btn btn-lg btn-primary">
                     </div>
                 </form>
-                <small class="d-block text-center mt-3">Already Registered <a href="/login">Login</a></small>
             </main>
         </div>
     </div>
