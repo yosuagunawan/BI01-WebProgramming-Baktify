@@ -32,7 +32,10 @@ Route::post('/add_category', [ProductTypeController::class, 'store'])->name('adm
 
 Route::get('/carts', [CartController::class, 'index']);
 Route::get('/addtocart/{id}', [CartController::class, 'store'])->name('member.addtocart');
-Route::get('/updatecart/{id}', [CartController::class, 'update'])->name('member.updatecart');
+Route::patch('/updatecart/{id}', [CartController::class, 'update'])->name('member.updatecart');
+Route::get('/checkoutcart', [CartController::class, 'viewcheckout']);
+Route::post('/checkout/{passcode}', [CartController::class, 'checkout'])->name('member.checkout');
+Route::get('/transaction', [CartController::class, 'indexTR']);
 
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/home', [ProductController::class, 'index']);

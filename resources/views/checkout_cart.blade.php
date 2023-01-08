@@ -28,7 +28,7 @@
                                         <img src="../storage/ProductImages/{{ $p->product_image }}" alt="">
                                         {{ $p->name }}
                                     </td>
-                                    <td>IDR {{ $p->price }}</td>
+                                    <td>{{ $p->price }}</td>
                                 @endif
                             @endforeach
                                 <td><input type="number" value="{{ $c->quantity }}" id="exampleFormControlInput1" name="quantity"></td>
@@ -46,14 +46,30 @@
                 </form>
                 @endforeach
         </table>
-        @if (session()->has('message'))
-            <div class="alert alert-success">
-                {{ session()->get('message') }}
-            </div>
-        @endif
-        <div id="check-out">
-            <button type="submit" class="btn btn-primary" onclick="location.href='{{ url('checkoutcart')}}'">Check out</button>
-            <h4>IDR {{$total}}</h4>
+    @endif
+    @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
         </div>
     @endif
+    <div id="check-out">
+        <p>shipping address : {{auth()->user()->address}}</p>
+        <h4>IDR {{$total}}</h4>
+    </div>
+    <div id="passcode">
+        <form action="{{Route('member.checkout', ['passcode' => $passcode])}}" method="POST">
+            @csrf
+            <p>please enter the following passcode to checkout: {{$passcode}}</p>
+            <input type="text" name="passcode">
+            @if ($errors->any())
+                <p style="color: red">{{ $errors->first() }}</p>
+            @endif
+            @if (session('alert'))
+                <div class="alert alert-success">
+                    {{ session('alert') }}
+                </div>
+            @endif
+            <button type="submit" class="btn btn-primary">Confirm</button>
+        </form>
+    </div>
 @endsection

@@ -12,3 +12,29 @@ table img {
 table input {
     width: 80px;
 }
+
+#message {
+    margin: auto;
+}
+
+#error {
+    margin: auto;
+}
+
+#check-out {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#passcode {
+    position: relative;
+    width: 450px;
+    justify-content: center;
+}
+
+#passcode input {
+    width: 450px;
+    margin-bottom: 5px;
+}
+

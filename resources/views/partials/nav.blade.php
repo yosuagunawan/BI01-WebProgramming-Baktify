@@ -25,7 +25,9 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/carts">Cart</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/transaction">My Transactions</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">

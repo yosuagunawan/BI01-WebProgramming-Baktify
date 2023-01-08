@@ -2,11 +2,16 @@
 
 @section('container')
     {{-- alert --}}
-    {{-- @if (session()->has('message'))
-            <div class="alert alert-success">
-                {{ session()->get('message') }}
-            </div>
-        @endif --}}
+    @if (session()->has('message'))
+        <div class="alert alert-success" id="message">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger mt-5" id="error">
+            {{ $errors->first() }}
+        </div>
+    @endif
     @foreach ($products as $product)
         <div class="card text-center p-1">
             <a href="/products/{{ $product->id }}">
@@ -45,6 +50,7 @@
             </div>
         </div>
     @endforeach
+
     {{-- @foreach ($products as $product)
                 <div class="col">
                     <div class="card p-3 my-2">
