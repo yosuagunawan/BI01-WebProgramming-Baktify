@@ -30,11 +30,18 @@ class ProductController extends Controller
         return view('insert_product', ['product_types' => $product_types]);
     }
     // route products page
-    public function index3()
+    public function index3(Request $request)
     {
-        $products = Product::paginate(12);
+        $search = $request['search'] ?? "";
+        if ($search != "") {
+            $products = Product::where('name', 'LIKE', "%$search%")->orWhere('description', 'LIKE', "%$search%")->get();
+        } else {
+            // $products = Product::paginate(12);
+            $products = Product::all();
+        }
         $product_types = DB::table('product_types')->get();
-        return view('products', ['products' => $products, 'product_types' => $product_types]);
+        return view('products', ['products' => $products, 'product_types'
+        => $product_types, 'search' => $search]);
     }
     //route update_product page
     public function index4($id)

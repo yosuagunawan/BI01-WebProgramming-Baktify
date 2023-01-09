@@ -44,7 +44,7 @@
             @endforeach
         </table>
         <div class="text-end">
-            <h3>Total Price: {{ number_format($total) }}</h3>
+            <h3>Total Price: IDR {{ number_format($total) }}</h3>
         </div>
     @endif
 @endsection

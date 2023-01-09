@@ -13,6 +13,17 @@
             </div>
         @endif
     </div>
+    <form action="" class="input-group mb-3 w-50 m-auto">
+        <input type="search" name="search" value="{{ $search }}" class="form-control d-inline"
+            placeholder="Search....">
+        <button class="btn btn-primary rounded-end">Search</button>
+        @if (auth()->user()->role_id == '2')
+            <a href="/insert_product" class="btn btn-secondary mx-3 rounded-start">Insert Product</a>
+        @else
+            <br>
+        @endif
+        {{-- <a href="/products" class="btn btn-info mx-3">Back to Products</a> --}}
+    </form>
 @endsection
 
 @section('container')
@@ -61,70 +72,10 @@
             </div>
         </div>
     @endforeach
-
-    {{-- @foreach ($products as $product)
-                <div class="col">
-                    <div class="card p-3 my-2">
-                        <img src="/asset/BookMockup.png" class="img-thumbnail img-fluid" alt="...">
-                        <article class="mainPost">
-                            <h2>
-                                <a href="/posts/{{ $post->slug }}" class="text-decoration-none">
-                                    {{ $post->title }}
-                                </a>
-                            </h2>
-
-                            <p>By:
-                                <a href="/authors/{{ $post->author->username }}" class="text-decoration-none">
-                                    {{ $post->author->name }}
-                                </a>
-                                <br>
-                                <a href="/posts?category={{ $post->category->slug }}" class="text-decoration-none">
-                                    {{ $post->category->name }}
-                                </a>
-                            </p>
-
-                            <p>{{ $post->excerpt }}</p>
-
-                            <button type="button" class="btn btn-primary">
-                                <a href="/posts/{{ $post->slug }}" class="text-decoration-none text-light">
-                                    Detail
-                                </a>
-                            </button>
-                        </article>
-                    </div>
-                </div>
-            @endforeach --}}
 @endsection
 
-@section('end')
+{{-- @section('end')
     <div class="mt-3">
         {{ $products->links() }}
     </div>
-@endsection
-
-{{-- @section()
-    @foreach ($products as $p)
-        <div class="card-item-container">
-            <div class="card-item-image">
-                <img id="product_image" src="storage/ProductImages/{{ $p->product_image }}" alt="">
-            </div>
-            <div class="card-item-name">
-                {{ $p->name }}
-            </div>
-            <div class="card-item-price">
-                IDR {{ $p->price }}
-            </div>
-            @foreach ($product_types as $pt)
-                @if ($p->product_type_id == $pt->id)
-                    <div class="card-item-product_type">
-                        {{ $pt->type_name }}
-                    </div>
-                @endif
-            @endforeach
-            <button class="card-inner-button"
-                onclick="location.href='{{ url('update_product', ['id' => $p->id]) }}'">Update</button>
-            <button class="card-inner-button"
-                onclick="location.href='{{ url('delete', ['id' => $p->id]) }}'">Delete</button>
-        </div>
-    @endforeach
 @endsection --}}
