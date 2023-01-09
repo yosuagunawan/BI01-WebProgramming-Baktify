@@ -17,11 +17,13 @@
         <input type="search" name="search" value="{{ $search }}" class="form-control d-inline"
             placeholder="Search....">
         <button class="btn btn-primary rounded-end">Search</button>
-        @if (auth()->user()->role_id == '2')
-            <a href="/insert_product" class="btn btn-secondary mx-3 rounded-start">Insert Product</a>
-        @else
-            <br>
-        @endif
+        @auth
+            @if (auth()->user()->role_id == '2')
+                <a href="/insert_product" class="btn btn-secondary mx-3 rounded-start">Insert Product</a>
+            @else
+                <br>
+            @endif
+        @endauth
         {{-- <a href="/products" class="btn btn-info mx-3">Back to Products</a> --}}
     </form>
 @endsection
