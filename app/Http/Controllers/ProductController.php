@@ -20,8 +20,7 @@ class ProductController extends Controller
     // route home
     public function index()
     {
-        $products = Product::paginate(12);
-        return view('home', ['products' => $products]);
+        return view('home');
     }
     // route insert_product page
     public function index2()
@@ -38,7 +37,7 @@ class ProductController extends Controller
                 ->orWhere('description', 'LIKE', "%$search%")
                 ->get();
         } else {
-            $products = Product::paginate(4);
+            $products = Product::paginate(12);
         }
         $product_types = DB::table('product_types')->get();
         return view('products', ['products' => $products, 'product_types'
