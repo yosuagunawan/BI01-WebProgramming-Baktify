@@ -27,7 +27,7 @@
                                     <img src="../storage/ProductImages/{{ $p->product_image }}" alt="">
                                     {{ $p->name }}
                                 </td>
-                                <td>{{ $p->price }}</td>
+                                <td>{{ number_format($p->price) }}</td>
                             @endif
                         @endforeach
                         <td><input type="number" value="{{ $c->quantity }}" name="quantity"></td>
@@ -35,7 +35,7 @@
                             @if ($c->product_id == $p->id)
                                 <td>{{ $c->quantity * $p->price }}</td>
                                 @php
-                                    $subtotal = $c->quantity * $p->price;
+                                    number_format($subtotal) = $c->quantity * $p->price;
                                 @endphp
                             @endif
                         @endforeach
@@ -46,12 +46,12 @@
                     </tr>
                 </tbody>
                 @php
-                    $total += $subtotal;
+                    number_format($total) += $subtotal;
                 @endphp
             @endforeach
         </table>
         <div class="d-flex justify-content-between flex-row-reverse">
-            <h3>Total Price: {{ $total }}</h3>
+            <h3>Total Price: {{ number_format($total) }}</h3>
             <p>Ship to: Member Address</p>
         </div>
         <div class="text-end">

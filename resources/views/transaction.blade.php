@@ -1,10 +1,10 @@
 @extends('layout.main')
 
-@section('container')
+@section('section')
     @if (count($times) == 0)
-        <h4>You don't have any transaction</h4>
+        <h4 class="mb-4">You don't have any transaction</h4>
     @else
-        <h4 style="margin: auto">Your Cart</h4>
+        <h4 class="mb-4">Your Cart</h4>
         <table class="table">
             <thead>
                 <tr>
@@ -15,7 +15,9 @@
                 </tr>
             </thead>
             @foreach ($times as $t)
-                <td style="border: none"><h5>{{$t->transaction_time}}</h5></td>
+                <td style="border: none">
+                    <h5>Transaction Date: {{ $t->transaction_time }}</h5>
+                </td>
                 @foreach ($carts as $c)
                     @if ($c->transaction_time == $t->transaction_time)
                         <tbody>
@@ -26,13 +28,13 @@
                                             <img src="../storage/ProductImages/{{ $p->product_image }}" alt="">
                                             {{ $p->name }}
                                         </td>
-                                        <td>IDR {{ $p->price }}</td>
+                                        <td>IDR {{ number_format($p->price) }}</td>
                                     @endif
                                 @endforeach
                                 <td><input type="number" value="{{ $c->quantity }}" readonly></td>
                                 @foreach ($products as $p)
                                     @if ($c->product_id == $p->id)
-                                        <td>IDR {{ $c->quantity * $p->price }}</td>
+                                        <td>IDR {{ number_format($c->quantity * $p->price) }}</td>
                                     @endif
                                 @endforeach
                             </tr>
@@ -41,8 +43,8 @@
                 @endforeach
             @endforeach
         </table>
-        <div class="d-flex justify-content-between flex-row-reverse">
-            <h3>Total Price: IDR {{ $total }}</h3>
+        <div class="text-end">
+            <h3>Total Price: {{ number_format($total) }}</h3>
         </div>
     @endif
 @endsection

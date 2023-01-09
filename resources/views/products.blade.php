@@ -1,17 +1,22 @@
 @extends('layout.main')
 
+@section('section')
+    <div class="container mb-2">
+        @if (session()->has('message'))
+            <div class="alert alert-success" id="message">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger mt-5" id="error">
+                {{ $errors->first() }}
+            </div>
+        @endif
+    </div>
+@endsection
+
 @section('container')
     {{-- alert --}}
-    @if (session()->has('message'))
-        <div class="alert alert-success" id="message">
-            {{ session()->get('message') }}
-        </div>
-    @endif
-    @if ($errors->any())
-        <div class="alert alert-danger mt-5" id="error">
-            {{ $errors->first() }}
-        </div>
-    @endif
     @foreach ($products as $product)
         <div class="card text-center p-1">
             <a href="/products/{{ $product->id }}">
@@ -21,7 +26,7 @@
 
             <div class="card-body">
                 <h5 class="card-title">{{ $product->name }}</h5>
-                <p class="card-text">{{ $product->price }}</p>
+                <p class="card-text">IDR {{ number_format($product->price) }}</p>
                 @foreach ($product_types as $pt)
                     @if ($product->product_type_id == $pt->id)
                         <h6 class="card-text bg-danger-subtle rounded-4 w-75 m-auto p-2">

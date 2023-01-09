@@ -17,7 +17,7 @@
             </thead>
 
             @foreach ($carts as $c)
-                <form action="{{Route('member.updatecart', ['id' => $c->id])}}" method="POST">
+                <form action="{{ Route('member.updatecart', ['id' => $c->id]) }}" method="POST">
                     @csrf
                     @method('PATCH')
                     <tbody>
@@ -28,13 +28,14 @@
                                         <img src="../storage/ProductImages/{{ $p->product_image }}" alt="">
                                         {{ $p->name }}
                                     </td>
-                                    <td>IDR {{ $p->price }}</td>
+                                    <td>IDR {{ number_format($p->price) }}</td>
                                 @endif
                             @endforeach
-                            <td><input type="number" value="{{ $c->quantity }}" id="exampleFormControlInput1" name="quantity"></td>
+                            <td><input type="number" value="{{ $c->quantity }}" id="exampleFormControlInput1"
+                                    name="quantity"></td>
                             @foreach ($products as $p)
                                 @if ($c->product_id == $p->id)
-                                    <td>{{ $c->quantity * $p->price }}</td>
+                                    <td>IDR {{ number_format($c->quantity * $p->price) }}</td>
                                 @endif
                             @endforeach
                             <td>
@@ -44,7 +45,7 @@
                         </tr>
                     </tbody>
                 </form>
-                @endforeach
+            @endforeach
         </table>
         @if (session()->has('message'))
             <div class="alert alert-success">
@@ -52,8 +53,11 @@
             </div>
         @endif
         <div id="check-out">
-            <button type="submit" class="btn btn-primary" onclick="location.href='{{ url('checkoutcart')}}'">Check out</button>
-            <h4>IDR {{$total}}</h4>
+            <button type="submit" class="btn btn-primary" onclick="location.href='{{ url('checkoutcart') }}'">Check
+                Out</button>
+            <h4>IDR {{ number_format($total) }}</h4>
         </div>
     @endif
 @endsection
+
+@section('section')

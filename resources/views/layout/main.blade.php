@@ -18,7 +18,7 @@
 
     <div class="container my-3">
         @yield('section')
-        <div class="row row-cols-lg-5 gap-3 row-cols-sm-2 justify-content-center">
+        <div class="row row-cols-lg-5 gap-3 row-cols-sm-3 justify-content-center">
             @yield('container')
         </div>
         @yield('end')
