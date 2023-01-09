@@ -34,10 +34,11 @@ class ProductController extends Controller
     {
         $search = $request['search'] ?? "";
         if ($search != "") {
-            $products = Product::where('name', 'LIKE', "%$search%")->orWhere('description', 'LIKE', "%$search%")->get();
+            $products = Product::where('name', 'LIKE', "%$search%")
+                ->orWhere('description', 'LIKE', "%$search%")
+                ->get();
         } else {
-            // $products = Product::paginate(12);
-            $products = Product::all();
+            $products = Product::paginate(4);
         }
         $product_types = DB::table('product_types')->get();
         return view('products', ['products' => $products, 'product_types'

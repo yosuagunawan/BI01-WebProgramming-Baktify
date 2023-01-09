@@ -74,8 +74,10 @@
     @endforeach
 @endsection
 
-{{-- @section('end')
-    <div class="mt-3">
-        {{ $products->links() }}
-    </div>
-@endsection --}}
+@section('end')
+    @if ($search == '')
+        <div class="mt-3">
+            {{ $products->links() }}
+        </div>
+    @endif
+@endsection
