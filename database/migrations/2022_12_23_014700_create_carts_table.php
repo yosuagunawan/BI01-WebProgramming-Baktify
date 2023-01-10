@@ -20,8 +20,6 @@ return new class extends Migration
             $table->foreignId('product_id');
             $table->integer('quantity');
             $table->boolean('check_out_status');
-            $table->string('transaction_time');
-            // $table->primary(['user_id', 'product_id']);
         });
     }
 
