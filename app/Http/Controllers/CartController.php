@@ -26,9 +26,9 @@ class CartController extends Controller
             ])->get();
         $products = DB::table('products')->get();
         $total = 0;
-        foreach($carts as $c) {
-            foreach($products as $p) {
-                if($c->product_id == $p->id) {
+        foreach ($carts as $c) {
+            foreach ($products as $p) {
+                if ($c->product_id == $p->id) {
                     $total = $total + $c->quantity * $p->price;
                 }
             }
@@ -39,18 +39,19 @@ class CartController extends Controller
         return view('cart', ['carts' => $carts, 'products' => $products, 'total' => $total]);
     }
 
-    public function transaction() {
+    public function transaction()
+    {
         $times = DB::table('carts')->distinct()->where('check_out_status', '=', '1')->get('transaction_time');
         $carts = DB::table('carts')
             ->where([
                 ['user_id', 'like', auth()->user()->id],
                 ['check_out_status', '=', '1']
-            ])->get();
+            ])->latest();
         $products = DB::table('products')->get();
         $total = 0;
-        foreach($carts as $c) {
-            foreach($products as $p) {
-                if($c->product_id == $p->id) {
+        foreach ($carts as $c) {
+            foreach ($products as $p) {
+                if ($c->product_id == $p->id) {
                     $total = $total + $c->quantity * $p->price;
                 }
             }
@@ -107,11 +108,11 @@ class CartController extends Controller
 
         // dd($temp);
         $product = Product::find($id);
-        if($product->quantity == 0) {
+        if ($product->quantity == 0) {
             // dd($product);
             return redirect()->back()->withErrors('Product sold out');
         }
-        if($temp == null) {
+        if ($temp == null) {
             DB::table('carts')->insert([
                 'user_id' => auth()->user()->id,
                 'product_id' => $id,
@@ -126,7 +127,7 @@ class CartController extends Controller
                     ['product_id', 'like', $id],
                     ['check_out_status', '=', '0']
                 ])
-                -> update([
+                ->update([
                     'quantity' => $temp->quantity + 1
                 ]);
 
@@ -189,8 +190,8 @@ class CartController extends Controller
             if ($product->quantity >= $request->get('quantity') - $tr->quantity) {
                 //update cart and product
                 DB::table('products')
-                    -> where('id', 'like', $tr->product_id)
-                    -> update(['quantity' => ($product->quantity + $tr->quantity - $request->get('quantity'))]);
+                    ->where('id', 'like', $tr->product_id)
+                    ->update(['quantity' => ($product->quantity + $tr->quantity - $request->get('quantity'))]);
                 DB::table('carts')
                     ->where('id', 'like', $tr->id)
                     ->update(['quantity' => $request->get('quantity')]);
@@ -201,8 +202,8 @@ class CartController extends Controller
         } else if ($request->get('quantity') < $tr->quantity) {
             // dd('bbb');
             DB::table('products')
-                -> where('id', 'like', $tr->product_id)
-                -> update(['quantity' => ($product->quantity + ($tr->quantity - $request->get('quantity')))]);
+                ->where('id', 'like', $tr->product_id)
+                ->update(['quantity' => ($product->quantity + ($tr->quantity - $request->get('quantity')))]);
             if ($request->get('quantity') == 0) {
                 //delete from cart
                 DB::table('carts')->where('id', 'like', $id)->delete();
@@ -216,7 +217,8 @@ class CartController extends Controller
         return redirect()->back()->with('message', 'Successfully Updated');
     }
 
-    public function viewcheckout() {
+    public function viewcheckout()
+    {
         $carts = DB::table('carts')
             ->where([
                 ['user_id', 'like', auth()->user()->id],
@@ -224,9 +226,9 @@ class CartController extends Controller
             ])->get();
         $products = DB::table('products')->get();
         $total = 0;
-        foreach($carts as $c) {
-            foreach($products as $p) {
-                if($c->product_id == $p->id) {
+        foreach ($carts as $c) {
+            foreach ($products as $p) {
+                if ($c->product_id == $p->id) {
                     $total = $total + $c->quantity * $p->price;
                 }
             }
@@ -237,13 +239,14 @@ class CartController extends Controller
         $characters = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $lgt = strlen($characters);
         $passcode = '';
-        for ($i=0;$i<6;$i++) {
+        for ($i = 0; $i < 6; $i++) {
             $passcode .= $characters[rand(0, $lgt - 1)];
         }
         return view('checkout_cart', ['carts' => $carts, 'products' => $products, 'total' => $total, 'passcode' => $passcode]);
     }
-    public function checkout(Request $request, $passcode) {
-        $time = now()->format('Y-m-d').' '.now()->format('H:i:s');
+    public function checkout(Request $request, $passcode)
+    {
+        $time = now()->format('Y-m-d') . ' ' . now()->format('H:i:s');
         // dd($time);
         if ($request->get('passcode') == $passcode) {
             DB::table('carts')

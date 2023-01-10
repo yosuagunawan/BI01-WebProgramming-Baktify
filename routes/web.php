@@ -34,7 +34,7 @@ Route::get('/checkoutcart', [CartController::class, 'viewcheckout']);
 Route::post('/checkoutcart/{passcode}', [CartController::class, 'checkout'])->name('member.checkout')->middleware('not_admin');
 Route::get('/carts', [CartController::class, 'index'])->middleware('not_admin');
 Route::get('/addtocart/{id}', [CartController::class, 'store'])->name('member.addtocart')->middleware('not_admin');
-Route::get('/updatecart/{id}', [CartController::class, 'update'])->name('member.updatecart')->middleware('not_admin');
+Route::patch('/updatecart/{id}', [CartController::class, 'update'])->name('member.updatecart')->middleware('not_admin');
 // Route::get('/checkout', [CartController::class, 'checkout'])->middleware('not_admin');
 Route::get('/transaction', [CartController::class, 'transaction'])->middleware('not_admin');
 

@@ -38,10 +38,6 @@
                                     <td>IDR {{ number_format($c->quantity * $p->price) }}</td>
                                 @endif
                             @endforeach
-                            <td>
-                                <button type="submit" class="btn btn-primary"
-                                    onclick="location.href='{{ url('updatecart', ['id' => $c->id]) }}'">Update Cart</button>
-                            </td>
                         </tr>
                     </tbody>
                 </form>

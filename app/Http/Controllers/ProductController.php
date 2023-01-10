@@ -38,6 +38,7 @@ class ProductController extends Controller
                 ->get();
         } else {
             $products = Product::paginate(12);
+            // $products = Product::orderBy('name', 'asc')->paginate(12);
         }
         $product_types = DB::table('product_types')->get();
         return view('products', ['products' => $products, 'product_types'
